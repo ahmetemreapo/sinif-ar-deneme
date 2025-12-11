@@ -6,8 +6,26 @@
     <title>Sınıf AR Deneyimi</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; background-color: #f0f0f0; }
+        body { margin: 0; padding: 0; background-color: #f0f0f0; font-family: sans-serif; }
         model-viewer { width: 100vw; height: 100vh; }
+        
+        .progress-bar {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding-top: 20px;
+            color: #333;
+            font-weight: bold;
+            background-color: rgba(255, 255, 255, 0.8);
+            position: absolute;
+            top: 0;
+            z-index: 10;
+        }
+
+        .progress-bar.hide {
+            display: none;
+            visibility: hidden;
+        }
     </style>
 </head>
 <body>
@@ -20,7 +38,7 @@
         auto-rotate
         shadow-intensity="1">
         
-        <div slot="progress-bar" style="text-align: center; padding-top: 20px;">
+        <div class="progress-bar" slot="progress-bar">
             Yükleniyor... Lütfen bekleyin.
         </div>
 
