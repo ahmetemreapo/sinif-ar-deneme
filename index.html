@@ -3,59 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sınıf AR Deneyimi</title>
+    <title>Sınıf AR Projesi</title>
     <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/3.3.0/model-viewer.min.js"></script>
     <style>
-        body { margin: 0; padding: 0; background-color: #f0f0f0; font-family: sans-serif; }
+        body { margin: 0; background-color: #f5f5f5; font-family: sans-serif; }
         model-viewer { width: 100vw; height: 100vh; }
 
-        #yukleniyor-kutusu {
+        .ar-button {
             position: absolute;
-            top: 20px;
+            bottom: 80px; 
             left: 50%;
-            transform: translateX(-50%);
-            background-color: white;
-            padding: 10px 20px;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            transform: translateX(-50%); 
+            
+            background-color: #007bff;
+            color: white;
+            border-radius: 30px;
+            border: none;
+            padding: 12px 24px;
+            font-size: 16px;
             font-weight: bold;
-            z-index: 100;
-            display: block; /* Başlangıçta görünür */
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+            z-index: 100; 
+            cursor: pointer;
+        }
+        
+        .ar-button:active {
+            transform: translateX(-50%) scale(0.95);
+            background-color: #0056b3;
         }
     </style>
 </head>
 <body>
 
     <model-viewer 
-        id="ar-model"
         src="Computer.glb" 
         ar 
         ar-modes="webxr scene-viewer quick-look" 
         camera-controls 
         auto-rotate
         shadow-intensity="1">
+
+        <button slot="ar-button" class="ar-button">
+            📱 Masanın Üstünde Gör
+        </button>
+
     </model-viewer>
-
-    <div id="yukleniyor-kutusu">
-        Yükleniyor... Lütfen bekleyin.
-    </div>
-
-    <script>
-        const modelViewer = document.querySelector('#ar-model');
-        const yukleniyorKutusu = document.querySelector('#yukleniyor-kutusu');
-
-        // Model tamamen yüklendiğinde çalışacak fonksiyon
-        modelViewer.addEventListener('load', () => {
-            console.log("Model yüklendi! Yazı kaldırılıyor.");
-            yukleniyorKutusu.style.display = 'none'; // Yazıyı yok et
-        });
-
-        // Hata olursa kullanıcı anlasın diye ek önlem (Opsiyonel)
-        modelViewer.addEventListener('error', (error) => {
-            yukleniyorKutusu.innerHTML = "Hata: Model bulunamadı. Dosya ismini kontrol et!";
-            yukleniyorKutusu.style.color = "red";
-        });
-    </script>
 
 </body>
 </html>
