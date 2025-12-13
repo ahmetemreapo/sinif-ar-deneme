@@ -8,62 +8,33 @@
     <style>
         body { margin: 0; background-color: #f5f5f5; font-family: sans-serif; }
         model-viewer { width: 100vw; height: 100vh; }
-        
+
         .ar-button {
             position: absolute; bottom: 80px; left: 50%; transform: translateX(-50%);
             background-color: #007bff; color: white; border-radius: 30px; border: none;
             padding: 12px 24px; font-size: 16px; font-weight: bold;
             box-shadow: 0 4px 8px rgba(0,0,0,0.2); z-index: 100; cursor: pointer;
         }
-        /* Hata mesajı kutusu */
-        #error-message {
-            display: none; position: absolute; top: 50%; left: 50%; 
-            transform: translate(-50%, -50%); background: rgba(255,0,0,0.9); 
-            color: white; padding: 20px; border-radius: 10px; text-align: center;
-        }
     </style>
 </head>
 <body>
 
-    <div id="error-message"></div>
-
     <model-viewer 
-        id="viewer"
         src="Computer.glb" 
         ar 
         ar-modes="webxr scene-viewer quick-look" 
         camera-controls 
         auto-rotate
         shadow-intensity="1"
-        scale="0.5 0.5 0.5">
+        ar-scale="auto"
+        ar-placement="floor"
+        camera-target="0m 0m 0m">
 
         <button slot="ar-button" class="ar-button">
             📱 Masanın Üstünde Gör
         </button>
 
     </model-viewer>
-
-    <script>
-        const viewer = document.querySelector("#viewer");
-        const errorMsg = document.querySelector("#error-message");
-
-        // Hata yakalama fonksiyonu
-        viewer.addEventListener("error", (event) => {
-            console.log(event);
-            errorMsg.style.display = "block";
-            errorMsg.innerHTML = `
-                <h3>Model Yüklenemedi!</h3>
-                <p>1. Dosya adının <b>Computer.glb</b> olduğundan emin ol.</p>
-                <p>2. Dosyanın HTML ile <b>aynı klasörde</b> olduğundan emin ol.</p>
-                <p>3. Dosyayı çift tıklayarak açma, <b>Live Server</b> kullan.</p>
-            `;
-        });
-
-        // Yüklendiğinde haber versin
-        viewer.addEventListener("load", () => {
-            console.log("Model başarıyla yüklendi!");
-        });
-    </script>
 
 </body>
 </html>
